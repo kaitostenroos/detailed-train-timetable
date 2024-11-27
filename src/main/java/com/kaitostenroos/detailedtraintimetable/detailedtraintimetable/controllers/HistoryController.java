@@ -2,6 +2,7 @@ package com.kaitostenroos.detailedtraintimetable.detailedtraintimetable.controll
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,12 @@ public class HistoryController {
     public ResponseEntity<String> postMethodName(@PathVariable String startStationId, @PathVariable String startStation, @PathVariable String endStationId, @PathVariable String endStation, @RequestBody String entity) {
         historyRepository.save(new History(startStationId, startStation, endStationId,endStation));
         return ResponseEntity.ok(entity);
+    }
+
+    @DeleteMapping("/history/{id}")
+    public ResponseEntity<String> deleteMethodName(@PathVariable Long id) {
+        historyRepository.deleteById(id);
+        return ResponseEntity.ok("Deleted");
     }
     
     
